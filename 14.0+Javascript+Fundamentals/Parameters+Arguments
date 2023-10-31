@@ -1,0 +1,28 @@
+// Edit the function to take money and calculate the number of bottles the robot is able to buy assuming milk cost $1.50
+
+function getMilk(money) {   
+  console.log("leaveHouse");
+  console.log("moveRight");
+  console.log("moveRight");
+  console.log("moveUp");
+  console.log("moveUp");
+  console.log("moveUp");
+  console.log("moveUp");
+  console.log("moveRight");
+  console.log("moveRight");
+  var bottles = Math.floor(money / 1.5); 
+  console.log("buy " + bottles +" bottles of milk")
+  console.log("moveLeft");
+  console.log("moveLeft");
+  console.log("moveDown");
+  console.log("moveDown");
+  console.log("moveDown");
+  console.log("moveDown");
+  console.log("moveLeft");
+  console.log("moveLeft");
+  console.log("enterHouse");
+  return money % 1.5;
+}
+
+money = prompt("Submit money for milk");
+console.log("Here's your change: $" + getMilk(money));
