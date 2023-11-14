@@ -12,18 +12,20 @@ function green(){
 green();
 
 function redirect(){
-    document.querySelector("input[type=checkbox]").onclick = function(){
+    document.querySelector("button").onclick = function(){
         var myLink = document.querySelector("li a")
         myLink.style.color = "orange";
-        myLink.innerHTML = "DuckDuckGo";
-        myLink.href = "https://www.DuckDuckGo.com";
+        myLink.innerHTML = "<em>DuckDuckGo</em>";
+        myLink.setAttribute("href", "https://www.DuckDuckGo.com");
+        // also can use: myLink.href = "https://www.DuckDuckGo.com";
     }
 }
 redirect();
 
-function changeBackground(){
-    document.querySelector("button").onclick = function(){
+function toggleZoom(){
+    document.querySelector("input[type=checkbox]").onclick = function(){
         document.querySelector("button").style.backgroundColor = "yellow";
+        document.querySelector("body").classList.toggle("huge");
     }
 }
-changeBackground();
+toggleZoom();
