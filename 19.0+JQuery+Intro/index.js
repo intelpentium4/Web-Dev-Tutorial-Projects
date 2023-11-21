@@ -12,9 +12,13 @@ $(document).ready(function(){
 // Modify link of all "a" attribute to point elsewhere
 $("a").attr("href", "https://www.DuckDuckGo.com");
 
-// Gives all button the function of turning the h1 green when clicked
+// Gives all button the function of turning the h1 green and animated when clicked
 $("button").click(function() {
     $("h1").css("color", "green");
+    $("h1").animate({
+        margin:"20%",
+        opacity: 0.75,
+    }).slideToggle();
 })
 
 // Logs the keys pressed
@@ -23,7 +27,11 @@ $("input").keypress(function(event){
 });
 
 // Changes the color when moused over, and add a new link after
+var isGoogle = false;
 $("a").on("mouseover", function(){
     $("a").css("color", "purple");
-    $("p").after("<a href='https:www.google.com'>Google</a>");
+    if(isGoogle == false){
+        $("p").after("<a href='https:www.google.com'>Google</a>");
+        isGoogle = true;
+    }
 });
