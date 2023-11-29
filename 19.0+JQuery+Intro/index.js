@@ -19,7 +19,7 @@ $("button").click(function() {
         margin:"20%",
         opacity: 0.75,
     }).slideToggle();
-})
+});
 
 // Logs the keys pressed
 $("input").keypress(function(event){
