@@ -2,11 +2,22 @@
 <%- include("partials/header.ejs") %>
 <div>
 <h1>Create Post</h1>
+<% if(locals.userName && locals.userTitle && locals.userMsg && locals.postIndex) { %>
+  <%# This triggers with edit.ejs to prefill the data for editing %>
+  <form action="/edit/submit?index=<%= postIndex %>" method="POST">
+    <input name="name" type="text" class="feedback-input" placeholder="Name" value="<%= userName %>" />
+    <input name="title" type="text" class="feedback-input" placeholder="Title" value="<%= userTitle %>" />
+    <textarea name="message" type="text" class="feedback-input" placeholder="Comment"><%= userMsg %></textarea>
+    <input type="submit" value="Post this to the world!" />
+  </form>
+<% } else { %>
+<%# This is the default for creating a new post %>
 <form action="/post/submit" method="POST">
   <input name="name" type="text" class="feedback-input" placeholder="Name" />
   <input name="title" type="text" class="feedback-input" placeholder="Title" />
   <textarea name="message" type="text" class="feedback-input" placeholder="Comment"></textarea>
   <input type="submit" value="Post this to the world!" />
 </form>
+<% } %>
 </div>
 <%- include("partials/footer.ejs") %>

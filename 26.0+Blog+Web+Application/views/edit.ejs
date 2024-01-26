@@ -2,11 +2,23 @@
 <%- include("partials/header.ejs") %>
 <div>
 <h1>Edit Post</h1>
-<form>
-  <input name="name" type="text" class="feedback-input" placeholder="Name" />
-  <input name="email" type="text" class="feedback-input" placeholder="Email" />
-  <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
-  <input type="submit" value="SUBMIT" />
-</form>
+<% if(locals.userName && locals.userTitle && locals.userMsg && locals.postDate) { %>
+    <% for(var i=0; i<userName.length; ++i){ %>
+      <br>
+      <h2><%= userTitle[i] %></h2>
+      <p><%= postDate[i] %> by <%= userName[i] %></p>
+      <p><%= userMsg[i] %> </p>
+      <!-- Redirects to /post pre-filling the form with the user -->
+      <a href="/post?index=<%= i %>" class="btn btn-info">Edit</a>
+
+      <!-- Make a button that tells the server side to delete this using the index: i. -->
+        <form method="post" action="/delete-post">
+            <input type="hidden" name="postIndex" value="<%= i %>">
+            <button type="submit" class="btn btn-danger">Delete Post</button>
+        </form>
+    <% } %>
+  <% } else { %>
+  <h1>Get Started Posting!</h1>
+  <% } %>
 </div>
 <%- include("partials/footer.ejs") %>
