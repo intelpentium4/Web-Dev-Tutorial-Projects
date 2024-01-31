@@ -10,7 +10,12 @@ main {
   text-align: center;
 }
 form {
+  display: flex;
+  align-items: center;
   margin-top: 50px;
+}
+.form-control {
+  margin-right: 10px;
 }
 .feedback-input {
   font-weight: 500;
@@ -25,8 +30,39 @@ form {
   box-sizing: border-box;
   outline: 0;
 }
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Use a suitable font */
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+}
 
+header {
+  background-color: #f9f9f9; /* Light gray background similar to YouTube */
+  color: #fff; /* White text */
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+nav a {
+  text-decoration: none;
+  color: #1da1f2; /* Twitter blue color */
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
 footer {
   position: absolute;
   bottom: 0;
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 767px) {
+  .navbar-toggler-icon {
+    background-color: #007bff; /* Set the color of the toggler icon for small screens */
+  }
 }
