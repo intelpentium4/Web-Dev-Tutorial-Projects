@@ -5,6 +5,7 @@
 <% if(locals.userName && locals.userTitle && locals.userMsg && locals.postDate) { %>
     <% for(var i=0; i<userName.length; ++i){ %>
       <br>
+      <div class="post-container">
       <h2><%= userTitle[i] %></h2>
       <p><%= postDate[i] %> by <%= userName[i] %></p>
       <p><%= userMsg[i] %> </p>
@@ -16,6 +17,7 @@
             <input type="hidden" name="postIndex" value="<%= i %>">
             <button type="submit" class="btn btn-danger">Delete Post</button>
         </form>
+      </div>
     <% } %>
   <% } else { %>
   <h1>Get Started Posting!</h1>

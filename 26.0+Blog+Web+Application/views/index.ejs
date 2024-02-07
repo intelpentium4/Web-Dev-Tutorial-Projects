@@ -2,19 +2,25 @@
 
 <% var samplePostDate = new Date(); %>
 <% samplePostDate.setFullYear(2017); %>
+<div class="index-container">
+<div class="post-container">
 <h2>Blog of the day</h2>
 <P><%= samplePostDate.toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric"}); %> by Bobasaur</p>
 <p>Today's the day my friend. The day you stumble upon this magnificent post and guess what? 
   You have this sudden urge to go and post the first thing that comes to mind. So go ahead, post dat sh!t.</p>
+</div>
 <% if(locals.userName && locals.userTitle && locals.userMsg && locals.postDate) { %>
   <% for(var i=0; i<userName.length; ++i){ %>
     <br>
+    <div class="post-container">
     <h2><%= userTitle[i] %></h2>
     <p><%= postDate[i] %> by <%= userName[i] %></p>
     <p><%= userMsg[i] %> </p>
+    </div>
   <% } %>
 <% } else { %>
 <h1>Get Started Posting!</h1>
 <% } %>
+</div>
 
 <%- include("partials/footer.ejs") %>

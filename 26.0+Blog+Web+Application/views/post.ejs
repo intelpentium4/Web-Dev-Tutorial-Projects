@@ -1,6 +1,6 @@
 <%# the partials which point to the header.ejs for the code for styling %>
 <%- include("partials/header.ejs") %>
-<div>
+<div class="post-container">
 <h1>Create Post</h1>
 <% if(locals.userName && locals.userTitle && locals.userMsg && locals.postIndex) { %>
   <%# This triggers with edit.ejs to prefill the data for editing %>
