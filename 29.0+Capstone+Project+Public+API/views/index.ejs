@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>pokemon lookup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Titan+One&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+</head>
+
+<body>
+  <h1>Who's that pokemon?</h1>
+  <% if(locals.name && locals.image) { %>
+    <%# This trigger prefill the data %>
+    <form action="/submit" method="POST">
+      <input name="name" type="text" class="feedback-input" placeholder="Name" value="<%= name %>" />
+      <input type="submit" value="Lookup" />
+      <div class="card" style="background-image: url('<%= image %>');">
+        <p>
+          <%= image %>
+        </p>
+      </div>
+      <p class="user">
+        <%= name.toUpperCase() %>
+      </p>
+    </form>
+  <% } else { %>
+  <%# This is the default %>
+  <form action="/submit" method="POST">
+    <input name="name" type="text" class="feedback-input" placeholder="Name" value="" />
+    <input type="submit" value="Lookup" />
+    <!-- The reason ../public/images/whisper-img.jpg doesn't work in your index.ejs file is because 
+    the browser doesn't have direct access to files outside of the web root (which is typically the public directory in many web servers).-->
+    <div class="card" style="background-image: url('/images/whisper-img.jpg');">
+      <p>
+        We have encountered an error!
+      </p>
+    </div>
+    <p class="user">
+      <%= name %>
+    </p>
+  </form>
+  <% } %>
+
+</body>
+
+</html>

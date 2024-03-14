@@ -15,13 +15,39 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // 4. When the user goes to the home page it should render the index.ejs file.
 app.get("/", async (req, res) => {
-    // 5. Use axios 
     try {
-        const result = await axios.get(API_URL + "/random");
-        res.render("index.ejs", { secret: result.data.secret, user: result.data.username });
-      } catch (error) {
-        res.render("index.ejs", { secret: error.response.data, user: "ERROR DETECTED" });
-      }
+        // 5. Use axios to fetch data from the API
+        const response = await axios.get(API_URL + "pikachu");
+        
+        // Extracting relevant data from the response
+        const name = response.data.name;
+        const image = response.data.sprites.front_default;
+        
+        // Rendering the index.ejs template with the extracted data
+        res.render("index.ejs", { name, image });
+    } catch (error) {
+        // Handling errors
+        console.error("Error fetching data from the API:", error);
+        res.render("index.ejs", { name: "ERROR DETECTED" });
+    }
+});
+
+app.post("/submit", async (req, res) => {
+    // 5. Use axios to fetch data from the API
+    try {
+        const response = await axios.get(API_URL + req.body.name);
+
+        // Extracting relevant data from the response
+        const name = response.data.name;
+        const image = response.data.sprites.front_default;
+        
+        // Rendering the index.ejs template with the extracted data
+        res.render("index.ejs", { name, image });
+    } catch (error) {
+        // Handling errors
+        console.error("Error fetching data from the API:", error);
+        res.render("index.ejs", { name: "ERROR DETECTED" });
+    }
 });
 
 // 6. Listen on your predefined port and start the server.
