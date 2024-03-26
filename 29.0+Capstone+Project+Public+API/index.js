@@ -22,9 +22,11 @@ app.get("/", async (req, res) => {
         // Extracting relevant data from the response
         const name = response.data.name;
         const image = response.data.sprites.front_default;
+        const sprite = response.data.sprites.versions['generation-v']['black-white'].animated.front_default;
+        const cries = response.data.cries.latest;
         
         // Rendering the index.ejs template with the extracted data
-        res.render("index.ejs", { name, image });
+        res.render("index.ejs", { name, image, sprite, cries });
     } catch (error) {
         // Handling errors
         console.error("Error fetching data from the API:", error);
@@ -40,9 +42,11 @@ app.post("/submit", async (req, res) => {
         // Extracting relevant data from the response
         const name = response.data.name;
         const image = response.data.sprites.front_default;
-        
+        const sprite = response.data.sprites.versions['generation-v']['black-white'].animated.front_default;
+        const cries = response.data.cries.latest;
+
         // Rendering the index.ejs template with the extracted data
-        res.render("index.ejs", { name, image });
+        res.render("index.ejs", { name, image, sprite, cries });
     } catch (error) {
         // Handling errors
         console.error("Error fetching data from the API:", error);

@@ -18,14 +18,27 @@
     <form action="/submit" method="POST">
       <input name="name" type="text" class="feedback-input" placeholder="Name" value="<%= name %>" />
       <input type="submit" value="Lookup" />
-      <div class="card" style="background-image: url('<%= image %>');">
-        <p>
-          <%= image %>
-        </p>
-      </div>
+      <% if(locals.sprite) { %>
+        <div class="card" style="background-image: url('');">
+          <img src="<%= sprite %>" alt="<%= name %>" style="width: 400px; height: 400px;">
+        </div>
+      <% } else { %>
+        <div class="card" style="background-image: url('<%= image %>');">
+          <p>
+            <%= image %>
+          </p>
+        </div>
+      <% } %>
+
       <p class="user">
         <%= name.toUpperCase() %>
       </p>
+      <% if(locals.cries) { %>
+      <audio controls>
+        <source src="<%= cries %>" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+      <% } %>
     </form>
   <% } else { %>
   <%# This is the default %>
