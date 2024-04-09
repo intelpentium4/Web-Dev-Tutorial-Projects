@@ -29,10 +29,48 @@ app.get("/filter", (req, res) => { // http://localhost:3000/filter?type=Puns
 });
 
 //4. POST a new joke
+app.post("/jokes", (req, res) => { // http://localhost:3000/jokes
+                                   // Body -> x-www-form-urlencoded
+  const newJoke = {
+    id: jokes.length+1,
+    jokeText: req.body.text, // text: "The most funny jokes are the ones that aren't funny but are so damn sad it becomes laughable.",
+    jokeType: req.body.type, // type: "Serious"
+  };
+  jokes.push(newJoke);
+  console.log(jokes.slice(-1)); // Access the last element in the array
+  res.json(jokes.slice(-1));
+});
 
 //5. PUT a joke
+app.put("/jokes/:id", (req, res) => { // http://localhost:3000/jokes/101
+                                      // Body -> x-www-form-urlencoded
+  const id = parseInt(req.params.id); // parseInt converts string -> integer
+  const replacementJoke = {
+    id: id,
+    jokeText: req.body.text, // text: "What do you get when you tell a person who's already lost in life and had hit rock bottom to get lost? You get what you fucking deserve. BANG*",
+    jokeType: req.body.type, // type: "Serious"
+  };
+  const searchIndex = jokes.findIndex((joke) => joke.id === id); // If index matches exactly (including type-wise), return the index that is found.
+  jokes[searchIndex] = replacementJoke;
+  res.json(jokes[searchIndex]);
+});
 
 //6. PATCH a joke
+app.patch("/jokes/:id", (req, res) => { // http://localhost:3000/jokes/101
+                                      // Body -> x-www-form-urlencoded
+  const id = parseInt(req.params.id);
+  const existingJoke = jokes.find((joke) => joke.id === id); // Find the existing joke's ID and set it to existingJoke.
+  const replacementJoke = {
+    id: id,
+    jokeText: req.body.text || existingJoke.jokeText, // If req.body.text or existingJoke, exist set to jokeText
+      // text: "If life is one big joke then laugh it off but don't rage quit."
+      // type: "Inspirational"
+    jokeType: req.body.type || existingJoke.jokeType, // An if, else statement will also work
+  };
+  const searchIndex = jokes.findIndex((joke) => joke.id === id);
+  jokes[searchIndex] = replacementJoke;
+  res.json(jokes[searchIndex]);
+});
 
 //7. DELETE Specific joke
 
