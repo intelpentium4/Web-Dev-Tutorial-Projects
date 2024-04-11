@@ -18,7 +18,10 @@ app.get("/jokes/:id", (req, res) => { // http://localhost:3000/jokes/2
   const id = parseInt(req.params.id); // parseInt converts string -> integer
   const foundJoke = jokes.find((item) => item.id === id); // triple check also checks data type (string vs int)
                                                           // object.find returns the object that is found.
-  res.json(foundJoke);
+  if(foundJoke)
+    res.json(foundJoke);
+  else
+    res.sendStatus(404);
 });
 
 //3. GET a jokes by filtering on the joke type
@@ -73,8 +76,28 @@ app.patch("/jokes/:id", (req, res) => { // http://localhost:3000/jokes/101
 });
 
 //7. DELETE Specific joke
+app.delete("/jokes/:id", (req, res) => { // http://localhost:3000/joke/101
+  const id = parseInt(req.params.id);
+  const searchIndex = jokes.findIndex((item) => item.id === id); // Search all the jokes and returns the index if found and -1 if not.
+  if(searchIndex > -1){
+    jokes.splice(searchIndex, 1); // Removes the one joke with the searchIndex
+    res.sendStatus(200);
+  } else {
+    res.status(404).json({ error: `Joke with ID: ${id} was not found. No Jokes were deleted.`});
+  }
+});
 
 //8. DELETE All jokes
+app.delete("/all", (req, res) => { // http://localhost:3000/all
+                                   // Authorization -> Type = APIKEY | Key = key | Value = masterKey | Add to = Query Params
+  const userKey = req.query.key;
+  if(userKey === masterKey){
+    jokes = [];
+    res.sendStatus(200);
+  } else {
+    res.status(404).json({ error: `Key: ${userKey} is not authorized to perform this action.`});
+  }
+});
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
