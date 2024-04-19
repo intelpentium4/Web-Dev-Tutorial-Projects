@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 4000;
 
-// In-memory data store
+// In-memory data store which will disappear if the server shuts down.
 let posts = [
   {
     id: 1,
@@ -62,14 +62,16 @@ app.get("/posts/:id", (req, res) => { // http://localhost:4000/post/1
 //CHALLENGE 3: POST a new post
 app.post("/posts", (req, res) => { // http://localhost:3000/posts
                                   // Body -> x-www-form-urlencoded
+  const newId = lastId += 1;
   const newPost = {
-    id: posts.length+1,
+    id: newId,
     title: req.body.title, // req.body from server.js which reads from index.ejs
     content: req.body.content, 
     author: req.body.author,
     date: new Date().toJSON(),
   };
   posts.push(newPost);
+  lastId = newId;
   console.log(posts.slice(-1)); // Access the last element in the array
   res.status(201).json(posts.slice(-1));
 });
@@ -85,11 +87,11 @@ app.patch("/posts/:id", (req, res) => { // http://localhost:3000/posts/2
     title: req.body.title || existingPost.title, // If req.body.text or existingPost, exist set to title
     content: req.body.content || existingPost.content, // An if, else statement will also work
     author: req.body.author || existingPost.author,
-    date: (req.body.title || req.body.content || req.body.author) ? new Date().toJSON() : existingPost.date,
+    date: (req.body.title !== existingPost.title || req.body.content !== existingPost.content || req.body.author !== existingPost.author) ? new Date().toJSON() : existingPost.date,
   };
   const searchIndex = posts.findIndex((item) => item.id === id);
   posts[searchIndex] = replacementPost;
-  res.json(posts[searchIndex]);
+  res.status(200).json(posts[searchIndex]);
 });
 
 //CHALLENGE 5: DELETE a specific post by providing the post id.
