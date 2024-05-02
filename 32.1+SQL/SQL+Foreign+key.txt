@@ -1,0 +1,34 @@
+-- go to: https://sqliteonline.com/
+
+create table customers(
+    id INT NOT NULL,
+    first_name STRING,
+    last_name STRING,
+    address STRING,
+    PRIMARY KEY(id)
+)
+
+insert into customers
+values (1, 'john', 'dough', '21 Checkmate Blvd'), (2,'Angela', 'Yu', '12 Sunset Dr')
+
+create table orders(
+    id INT NOT NULL,
+    order_number INT,
+    customer_id INT,
+    product_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(customer_id) references customers(id),
+    FOREIGN KEY(product_id) REFERENCES products(id)
+)
+
+insert into orders
+values (1, 4362, 2, 1)
+
+-- Join Tables
+select orders.order_number, customers.first_name, customers.last_name, customers.address
+from orders
+inner join customers on orders.customer_id = customers.id
+
+select orders.order_number, products.name, products.price
+from orders
+inner join products on orders.product_id = products.id

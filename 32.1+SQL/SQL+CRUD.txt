@@ -1,0 +1,24 @@
+-- go to: https://sqliteonline.com/
+
+-- continue from Create+table
+select * from products where id=1
+
+-- edit the data inside the table
+update products 
+set price=0.80 
+where id=2
+
+-- change the table itself
+alter table products
+add stock int
+
+update products 
+set stock=12
+where id=2
+
+update products 
+set stock=32
+where id=1
+
+-- delete data inside the table
+delete from products where name='pencil'

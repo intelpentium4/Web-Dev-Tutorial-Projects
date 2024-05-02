@@ -1,0 +1,18 @@
+-- go to: https://sqliteonline.com/
+
+-- creating a table
+create table products (
+    ID INT not null,
+    name STRING,
+    price MONEY,
+    PRIMARY KEY (ID)
+)
+
+-- adding data into a table
+insert into products values (1, 'pen', 1.20)
+
+-- query the data
+select * from products
+
+-- adding with specified fields
+insert into products (id, name) values (2, 'pencil')
