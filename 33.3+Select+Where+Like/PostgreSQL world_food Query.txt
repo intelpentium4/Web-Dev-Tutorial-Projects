@@ -1,0 +1,7 @@
+-- Begins with the letter "U"
+select country, wheat_production from world_food
+where country like 'U' || '%';
+
+-- Ends with the letter "a"
+select country, rice_production from world_food
+where country not like 'I%' AND country like '%a';
