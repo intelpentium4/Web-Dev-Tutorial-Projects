@@ -118,3 +118,15 @@ SELECT *
 FROM visited_countries
 JOIN users
 ON users.id = user_id;
+
+-- Create a unique constraint that stops a user(id) from adding a country(code) that was previously visited --
+alter table visited_countries
+add unique(user_id, country_code);
+
+-- Erase data from a table and also return all data that was deleted --
+delete from visited_countries
+where country_code = 'AU'
+returning *;
+
+-- Change data from users and set name --
+update users set name = "Angus" where id = 0;
