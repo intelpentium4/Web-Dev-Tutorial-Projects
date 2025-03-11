@@ -7,15 +7,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+var maxLength = Math.floor(2+(Math.random() * 2)); // Random between 2-3
+var cpr = new Date().getFullYear();
+
 ReactDOM.render(
     <div>
         <h1>Hello Woow</h1>
         <p>This is what must be done</p>
         <ol>
             <li>Hostile takeover of Cognizant and TheHartford</li>
-            <li>Fire everyone with last names longer than 2 characters</li>
+            <li>Fire everyone with last names longer than {maxLength} characters</li>
             <li>Profit???</li>
         </ol>
+        <footer>Copyright {cpr}</footer>
     </div>, 
 document.getElementById("root"));
 
