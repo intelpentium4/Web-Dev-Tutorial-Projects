@@ -6,7 +6,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import List from "./components/List";
+import List, { maxLength } from "./components/List";
 
 
 var cpr = new Date().getFullYear();
@@ -15,6 +15,12 @@ var cpr = new Date().getFullYear();
 const heading = {
     color: "blue"
 };
+
+// maxLength variable imported from List.jsx inside components. Names must match.
+if(maxLength == 2)
+{
+    heading.color = "green";
+}
 
 ReactDOM.render(
     <div>

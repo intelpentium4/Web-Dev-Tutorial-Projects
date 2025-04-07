@@ -27,3 +27,4 @@ function List(){
 }
 
 export default List;
+export { maxLength };
